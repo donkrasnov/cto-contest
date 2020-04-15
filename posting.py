@@ -3,9 +3,12 @@ import requests
 
 def main():
     # Токены доступа
-    newVkToken = 'c6793f38f309ecb854a3e178e93438a5b05a533d02cfe008f1dfb6d580071a55edfd53abb498764247e61'
-    myUserId = '498534285'
-    newFbToken = 'EAAJF89iagS8BAE3Q2S7tfgMj7WZBtUnQN4aSRyRBR7YzflzFhJ5MwYr75SrftAMPBByrgv6kAJKAie0l9IjsfAZAIyzTjSPm3EEI98agHZBDLZAFETNNEvU6ngvyPUUYngskD6YQi1JgJDRfA4kf5aHLwgzDlXczyYofZBDeaeBXM3CmVWbQ88UbJNKWHVIEZD'
+    # Нужно указать персональные токены доступа
+    # И ID страницы в контакте, на стене которой необходимо сделать публикацю.
+    # Сейчас токены намеренно испорчены.
+    newVkToken = 'c6793f38f309ecb854a3e178e93438a5b05a533d02cfe008f1dfb6d580071a5bb498764247e61'
+    myUserId = '4985385'
+    newFbToken = 'EAAJF89iagS8BAE3Q2S7tfgMj7WZBtUnQN4aSRyRBR7YzflzFhJ5MwYr7MPBByrgv6kAJKAie0l9IjsfAZAIyzTjSPm3EEI98agHZBDLZAFETNNEvU6ngvyPUUYngskD6YQi1JgJDRfA4kf5aHLwgzDlXczyYofZBDeaeBXM3CmVWbQ88UbJNKWHVIEZD'
 
     # Выбор простого поста или поста с картинкой
     chooseCase = int(input('Введите 1, если публикация содержит только текст.\nВведите 2, если текст и фото.\nВвод: '))
@@ -26,6 +29,7 @@ def main():
         print(responseToPost.json())
 
         # Запрос на публикацию поста в Facebook
+        # 'https://graph.facebook.com/{group_id}}/feed' -- нужно заменить параметр group_id на группу, в которой нужно создать пост
         requestToFbPost = 'https://graph.facebook.com/105260741152680/feed'
         dataForRequestToFbPost = {'message': myPost,
                                   'access_token': newFbToken}
@@ -99,6 +103,7 @@ def main():
         print(responseToPostWithPhoto.json())
 
         # Запрос для публикации поста с фотографией в Facebook
+        # 'https://graph.facebook.com/{group_id}}/photos' -- нужно заменить параметр group_id на группу, в которой нужно создать пост
         requestToFbPostWithPhoto = 'https://graph.facebook.com/105260741152680/photos'
         dataForRequestToFbPostWithPhoto = {'message': myPost,
                                            'access_token': newFbToken,
